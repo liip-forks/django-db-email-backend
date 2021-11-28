@@ -1,5 +1,6 @@
 import os
 import django
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = True
 
@@ -53,7 +54,8 @@ if django.VERSION >= (1, 8):
             'OPTIONS': {
                 'context_processors': [
                     'django.contrib.auth.context_processors.auth',
-                    'django.contrib.messages.context_processors.messages'
+                    'django.contrib.messages.context_processors.messages',
+                    'django.template.context_processors.request'
                 ]
             },
         },
@@ -70,3 +72,5 @@ except:
     pass
 else:
     INSTALLED_APPS += ('south',)
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
