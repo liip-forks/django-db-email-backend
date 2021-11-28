@@ -53,7 +53,7 @@ class EmailAdmin(admin.ModelAdmin):
 
             msg.send(fail_silently=False)
 
-        self.message_user(request, f'{queryset.count()}Emails sent', 25)
+        self.message_user(request, f'{queryset.count()} Emails sent', 25)
 
     send_mail.short_description = "Send Actual Email via SMTP"
 
