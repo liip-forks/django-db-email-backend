@@ -10,6 +10,7 @@ Under development
 ~~~~~~~~~~
 * Adds `SMTPDBEmailBackend` , a mixture between SMTP and DB mail backend.
 * Remove south migrations
+* Allow only superusers to access email body.
 
 
 2021.11.29

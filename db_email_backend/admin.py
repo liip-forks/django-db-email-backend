@@ -28,16 +28,25 @@ class EmailAdmin(admin.ModelAdmin):
     fields = (
         ('from_email', 'create_date', 'content_subtype'),
         ('to', 'cc', 'bcc'),
-        'subject', 'body', 'headers')
+        'subject', 'body', 'headers', 'has_errors', 'error')
     readonly_fields = (
-        'create_date', 'from_email', 'to', 'cc', 'bcc', 'subject', 'body', 'content_subtype', 'headers')
-    list_display = ('subject', 'to', 'from_email', 'create_date', 'attachment_count', 'alternative_count')
-    list_filter = ('content_subtype',)
+        'create_date', 'from_email', 'to', 'cc', 'bcc', 'subject', 'body', 'content_subtype', 'headers', 'has_errors',
+        'error')
+    list_display = (
+    'subject', 'to', 'from_email', 'create_date', 'attachment_count', 'alternative_count', 'has_errors', 'error')
+    list_filter = ('has_errors', 'content_subtype',)
     date_hierarchy = 'create_date'
     search_fields = ('to', 'from_email', 'cc', 'bcc', 'subject', 'body')
     inlines = (EmailAlternativeInline, EmailAttachmentInline)
 
     actions = ['send_mail']
+
+    def get_fields(self, request, obj=None):
+        fields = super().get_fields(request, obj)
+        if not request.user.is_superuser:
+            fields = list(fields)
+            fields.remove('body')
+        return fields
 
     @override_settings(EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend')
     def send_mail(self, request, queryset):
