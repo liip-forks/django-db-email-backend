@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Email(models.Model):
@@ -14,6 +15,8 @@ class Email(models.Model):
     cc = models.TextField(blank=True)
     bcc = models.TextField(blank=True)
     headers = models.TextField(blank=True)
+    has_errors = models.BooleanField(default=False, verbose_name=_('Has Errors'))
+    error = models.TextField(blank=True, verbose_name=_('Errors'))
 
     def __str__(self):
         return '{} - {}, {}'.format(self.subject, self.to, self.create_date)
