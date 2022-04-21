@@ -24,3 +24,10 @@ In settings.py::
     # EMAIL_BACKEND = 'db_email_backend.backend.SMTPDBEmailBackend'
 
 
+
+Configuration
+=============
+
+SMTP_EMAIL_FILTER_FUNCTION_PATH default to `db_email_backend.utils.smtp_filter_email_function`. a dotted path to the smtp email filter function.
+A filter function for the smtp email, takes the email_message as a parameter, and return Boolean. Case it returns False, then the backend won't send this message via smtp.
+You can use it to disallow SMTP sending for certain email based to their properties.

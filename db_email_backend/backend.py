@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
+
 import logging
+
 from django.core.files.base import ContentFile
 from django.core.mail.backends.base import BaseEmailBackend
+from django.core.mail.backends.smtp import EmailBackend as SMTPEmailBackend
 
 from .models import Email, EmailAlternative, EmailAttachment
-from django.core.mail.backends.smtp import EmailBackend as SMTPEmailBackend
+from .app_settings import email_filter
 
 logger = logging.getLogger('db_mail_backend')
 
@@ -81,8 +84,9 @@ class SMTPDBEmailBackend(SMTPEmailBackend):
                     email_inst = record_email_message(message, fail_silently=self.fail_silently)
                 except Exception as e:
                     logger.error(e)
-
                 try:
+                    if not email_filter(message):
+                        continue
                     sent = self._send(message)
                     if sent:
                         num_sent += 1

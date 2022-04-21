@@ -66,11 +66,4 @@ DEFAULT_FILE_STORAGE = 'test_app.storage.TestStorage'
 MEDIA_ROOT = BASE_DIR + '/media/'
 MEDIA_URL = '/media/'
 
-try:
-    import south
-except:
-    pass
-else:
-    INSTALLED_APPS += ('south',)
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

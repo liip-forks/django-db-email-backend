@@ -6,8 +6,13 @@ Under development
 ~~~~~~~~~~~~~~~~~~
 *
 
-2022.04.20
-~~~~~~~~~~
+2022.04.21 v05.2
+~~~~~~~~~~~~~~~~
+* Adds `SMTP_EMAIL_FILTER_FUNCTION_PATH` setting to allow filtering out email from smtp sending.
+
+
+2022.04.20 v05.1
+~~~~~~~~~~~~~~~~
 * Adds `SMTPDBEmailBackend` , a mixture between SMTP and DB mail backend.
 * Remove south migrations
 * Allow only superusers to access email body.
