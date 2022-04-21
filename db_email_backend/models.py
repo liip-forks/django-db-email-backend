@@ -15,7 +15,7 @@ class Email(models.Model):
     cc = models.TextField(blank=True)
     bcc = models.TextField(blank=True)
     headers = models.TextField(blank=True)
-    has_errors = models.BooleanField(default=False, verbose_name=_('Has Errors'))
+    succeeded = models.BooleanField(default=True, verbose_name=_('Succeeded?'))
     error = models.TextField(blank=True, verbose_name=_('Errors'))
 
     def __str__(self):

@@ -28,13 +28,13 @@ class EmailAdmin(admin.ModelAdmin):
     fields = (
         ('from_email', 'create_date', 'content_subtype'),
         ('to', 'cc', 'bcc'),
-        'subject', 'body', 'headers', 'has_errors', 'error')
+        'subject', 'body', 'headers', 'succeeded', 'error')
     readonly_fields = (
-        'create_date', 'from_email', 'to', 'cc', 'bcc', 'subject', 'body', 'content_subtype', 'headers', 'has_errors',
+        'create_date', 'from_email', 'to', 'cc', 'bcc', 'subject', 'body', 'content_subtype', 'headers', 'succeeded',
         'error')
     list_display = (
-    'subject', 'to', 'from_email', 'create_date', 'attachment_count', 'alternative_count', 'has_errors', 'error')
-    list_filter = ('has_errors', 'content_subtype',)
+    'subject', 'to', 'from_email', 'create_date', 'attachment_count', 'alternative_count', 'succeeded', 'error')
+    list_filter = ('succeeded', 'content_subtype',)
     date_hierarchy = 'create_date'
     search_fields = ('to', 'from_email', 'cc', 'bcc', 'subject', 'body')
     inlines = (EmailAlternativeInline, EmailAttachmentInline)
