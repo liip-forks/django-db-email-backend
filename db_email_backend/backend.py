@@ -92,7 +92,7 @@ class SMTPDBEmailBackend(SMTPEmailBackend):
                         num_sent += 1
                 except Exception as e:
                     if email_inst:
-                        Email.objects.filter(pk=email_inst.pk).update(error=str(e))
+                        Email.objects.filter(pk=email_inst.pk).update(error=str(e), succeeded=False)
                     raise e
             if new_conn_created:
                 self.close()
