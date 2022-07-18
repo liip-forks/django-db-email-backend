@@ -7,14 +7,14 @@ from django.utils.translation import gettext_lazy as _
 
 class Email(models.Model):
     create_date = models.DateTimeField(auto_now_add=True)
-    subject = models.TextField(blank=True)
-    body = models.TextField(blank=True)
+    subject = models.TextField(blank=True, verbose_name=_("Subject"))
+    body = models.TextField(blank=True, verbose_name=_('Body'))
     content_subtype = models.CharField(max_length=254)
-    from_email = models.CharField(max_length=254, blank=True)
-    to = models.TextField(blank=True)
-    cc = models.TextField(blank=True)
-    bcc = models.TextField(blank=True)
-    headers = models.TextField(blank=True)
+    from_email = models.CharField(max_length=254, blank=True, verbose_name=_('From'))
+    to = models.TextField(blank=True, verbose_name=_('To'))
+    cc = models.TextField(blank=True, verbose_name=_('CC'))
+    bcc = models.TextField(blank=True, verbose_name=_('BCC'))
+    headers = models.TextField(blank=True, verbose_name=_('Headers'))
     succeeded = models.BooleanField(default=True, verbose_name=_('Succeeded?'))
     error = models.TextField(blank=True, verbose_name=_('Errors'))
 
