@@ -1,33 +1,49 @@
 Django DB Email Backend
 =======================
 
-Initially, Django email backend for storing messages to a database. This is intended to be used in developement in cases where you
-want to test sending emails, but don't want to send real emails and don't have access to the console output (such as on
-a remote server).
+Record Email Messages Sent to database , with the ability to also send them via SMTP.
 
-As this KUWAITNET fork, package has been updated and introduced `SMTPDBEmailBackend` which is a mixture between SMTP and DB mail backend,
-it writes to the database then send the email over smtp, if any errors happen while sending it is reflected in the email model.
-Also Package is now production ready.
 
-Access to Email message content is allowed only for superusers for security concerns.
+Usage
+-----
 
-To install::
+Install ::
 
     pip install django-db-email-backend
-
 
 In settings.py::
 
     INSTALLED_APPS += ['db_email_backend']
-    EMAIL_BACKEND = 'db_email_backend.backend.DBEmailBackend'
-    # or for live
-    # EMAIL_BACKEND = 'db_email_backend.backend.SMTPDBEmailBackend'
 
+    EMAIL_BACKEND = 'db_email_backend.backend.DBEmailBackend'
+    # recrd the email message to database
+
+    # or
+    # EMAIL_BACKEND = 'db_email_backend.backend.SMTPDBEmailBackend'
+    # Record to database and send via SMTP.
+    # IF errors happened you can see it in the Admin and resend it again.
 
 
 Configuration
 =============
 
 SMTP_EMAIL_FILTER_FUNCTION_PATH default to `db_email_backend.utils.smtp_filter_email_function`. a dotted path to the smtp email filter function.
-A filter function for the smtp email, takes the email_message as a parameter, and return Boolean. Case it returns False, then the backend won't send this message via smtp.
-You can use it to disallow SMTP sending for certain email based to their properties.
+A filter function for the smtp email, takes the email_message (django.core.mail.message.EmailMessage) as a parameter, and return False if this message should be filter out out and not sent via the backend.
+
+Example::
+
+    def only_allow_emails_to_mahad(message):
+        return True if 'mahad@kuwaitnet.com' in message.to else False
+
+
+DB_EMAIL_FILTER_FUNCTION_PATH default to `db_email_backend.utils.db_filter_email_function`. a dotted path to the db email filter function. same as the SMTP one but for the Database.
+
+Example::
+
+    def dont_record_error_emails(message):
+        return False if settings.EMAIL_SUBJECT_PREFIX in message.subject else True
+
+Admin
+-----
+
+Package have and admin integration ready where you can send the email SMTP even if the EMAIL_HOST = "db_email_backend.backend.DBEmailBackend"

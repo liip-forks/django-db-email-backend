@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.contrib import admin
 from django.core.mail import EmailMessage
 from django.test import override_settings
+from django.utils.translation import gettext_lazy as _
 
 from .models import Email, EmailAlternative, EmailAttachment
 
@@ -33,7 +34,7 @@ class EmailAdmin(admin.ModelAdmin):
         'create_date', 'from_email', 'to', 'cc', 'bcc', 'subject', 'body', 'content_subtype', 'headers', 'succeeded',
         'error')
     list_display = (
-    'subject', 'to', 'from_email', 'create_date', 'attachment_count', 'alternative_count', 'succeeded', 'error')
+        'subject', 'to', 'from_email', 'create_date', 'attachment_count', 'alternative_count', 'succeeded', 'error')
     list_filter = ('succeeded', 'content_subtype',)
     date_hierarchy = 'create_date'
     search_fields = ('to', 'from_email', 'cc', 'bcc', 'subject', 'body')
@@ -64,7 +65,7 @@ class EmailAdmin(admin.ModelAdmin):
 
         self.message_user(request, f'{queryset.count()} Emails sent', 25)
 
-    send_mail.short_description = "Send Actual Email via SMTP"
+    send_mail.short_description = _("Send Email")
 
     def attachment_count(self, instance):
         return instance.attachments.count()

@@ -6,6 +6,14 @@ Under development
 ~~~~~~~~~~~~~~~~~~
 *
 
+2022.04.21 v05.6
+~~~~~~~~~~~~~~~~
+* Adds `DB_EMAIL_FILTER_FUNCTION_PATH` setting to allow filtering out email from DB recording.
+
+2022.04.21 v05.5
+~~~~~~~~~~~~~~~~
+* Fixes issues in case of error sending the mail.
+
 2022.04.21 v05.4
 ~~~~~~~~~~~~~~~~
 * Adds `SMTP_EMAIL_FILTER_FUNCTION_PATH` setting to allow filtering out email from smtp sending.

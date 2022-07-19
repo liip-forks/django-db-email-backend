@@ -6,10 +6,10 @@ from django.utils.translation import gettext_lazy as _
 
 
 class Email(models.Model):
-    create_date = models.DateTimeField(auto_now_add=True)
+    create_date = models.DateTimeField(auto_now_add=True, verbose_name=_("Creation date"))
     subject = models.TextField(blank=True, verbose_name=_("Subject"))
     body = models.TextField(blank=True, verbose_name=_('Body'))
-    content_subtype = models.CharField(max_length=254)
+    content_subtype = models.CharField(max_length=254, verbose_name=_("content subtype"))
     from_email = models.CharField(max_length=254, blank=True, verbose_name=_('From'))
     to = models.TextField(blank=True, verbose_name=_('To'))
     cc = models.TextField(blank=True, verbose_name=_('CC'))

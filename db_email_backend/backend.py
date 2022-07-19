@@ -8,7 +8,7 @@ from django.core.mail.backends.base import BaseEmailBackend
 from django.core.mail.backends.smtp import EmailBackend as SMTPEmailBackend
 
 from .models import Email, EmailAlternative, EmailAttachment
-from .app_settings import email_filter
+from .app_settings import email_filter, db_email_filter
 
 logger = logging.getLogger('db_mail_backend')
 
@@ -54,7 +54,8 @@ def record_email_message(msg, fail_silently):
 class DBEmailBackend(BaseEmailBackend):
     def send_messages(self, email_messages):
         for msg in email_messages:
-            return record_email_message(msg, fail_silently=self.fail_silently)
+            if db_email_filter(msg):
+                return record_email_message(msg, fail_silently=self.fail_silently)
         return len(email_messages)
 
 
@@ -81,15 +82,15 @@ class SMTPDBEmailBackend(SMTPEmailBackend):
             num_sent = 0
             for message in email_messages:
                 try:
-                    email_inst = record_email_message(message, fail_silently=self.fail_silently)
+                    if db_email_filter(message):
+                        email_inst = record_email_message(message, fail_silently=self.fail_silently)
                 except Exception as e:
                     logger.error(e)
                 try:
-                    if not email_filter(message):
-                        continue
-                    sent = self._send(message)
-                    if sent:
-                        num_sent += 1
+                    if email_filter(message):
+                        sent = self._send(message)
+                        if sent:
+                            num_sent += 1
                 except Exception as e:
                     if email_inst:
                         Email.objects.filter(pk=email_inst.pk).update(error=str(e), succeeded=False)
