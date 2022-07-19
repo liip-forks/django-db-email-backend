@@ -6,12 +6,12 @@ Under development
 ~~~~~~~~~~~~~~~~~~
 *
 
-2022.04.21 v05.7
+2022.07.19 v05.7
 ~~~~~~~~~~~~~~~~
 * Adds `DB_EMAIL_FILTER_FUNCTION_PATH` setting to allow filtering out email from DB recording.
 * Enhances in read me and strings translations.
 
-2022.04.21 v05.5
+2022.07.18 v05.5
 ~~~~~~~~~~~~~~~~
 * Fixes issues in case of error sending the mail.
 
