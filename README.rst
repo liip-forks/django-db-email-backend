@@ -9,7 +9,7 @@ Usage
 
 Install ::
 
-    pip install django-db-email-backend
+    pip install kn-django-db-email-backend
 
 In settings.py::
 
