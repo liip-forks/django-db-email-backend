@@ -16,7 +16,7 @@ In settings.py::
     INSTALLED_APPS += ['db_email_backend']
 
     EMAIL_BACKEND = 'db_email_backend.backend.DBEmailBackend'
-    # recrd the email message to database
+    # record the email message to database
 
     # or
     # EMAIL_BACKEND = 'db_email_backend.backend.SMTPDBEmailBackend'

@@ -21,6 +21,10 @@ class Email(models.Model):
     def __str__(self):
         return '{} - {}, {}'.format(self.subject, self.to, self.create_date)
 
+    class Meta:
+        verbose_name = _('Email Log')
+        verbose_name_plural = _('Emails Log')
+
 
 class EmailAlternative(models.Model):
     email = models.ForeignKey(Email, on_delete=models.CASCADE, related_name='alternatives')
