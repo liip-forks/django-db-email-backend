@@ -23,6 +23,10 @@ In settings.py::
     # Record to database and send via SMTP.
     # IF errors happened you can see it in the Admin and resend it again.
 
+Migrate::
+
+    $ python manage.py migrate
+
 
 Configuration
 =============
