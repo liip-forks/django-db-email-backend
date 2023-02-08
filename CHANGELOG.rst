@@ -6,9 +6,9 @@ Under development
 ~~~~~~~~~~~~~~~~~~
 *
 
-2023.02.08 v05.8
+2023.02.08 v05.9
 ~~~~~~~~~~~~~~~~
-* Adds arabic translation
+* Adds arabic translation; Mark strings are translatable.
 * Adds check for change permission to send email from admin
 
 2022.07.19 v05.7

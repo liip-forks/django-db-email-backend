@@ -76,12 +76,12 @@ class EmailAdmin(admin.ModelAdmin):
     def attachment_count(self, instance):
         return instance.attachments.count()
 
-    attachment_count.short_description = 'Attachments'
+    attachment_count.short_description = _('Attachments')
 
     def alternative_count(self, instance):
         return instance.alternatives.count()
 
-    alternative_count.short_description = 'Alternatives'
+    alternative_count.short_description = _('Alternatives')
 
     def has_add_permission(self, request, obj=None):
         return False
