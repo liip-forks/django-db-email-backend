@@ -42,6 +42,12 @@ class EmailAdmin(admin.ModelAdmin):
 
     actions = ['send_mail']
 
+    def get_actions(self, request):
+        actions = super().get_actions(request)
+        if not self.has_change_permission(request):
+            actions.pop('send_mail')
+        return actions
+
     def get_fields(self, request, obj=None):
         fields = super().get_fields(request, obj)
         if not request.user.is_superuser:

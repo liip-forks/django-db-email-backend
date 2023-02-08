@@ -6,6 +6,11 @@ Under development
 ~~~~~~~~~~~~~~~~~~
 *
 
+2023.02.08 v05.8
+~~~~~~~~~~~~~~~~
+* Adds arabic translation
+* Adds check for change permission to send email from admin
+
 2022.07.19 v05.7
 ~~~~~~~~~~~~~~~~
 * Adds `DB_EMAIL_FILTER_FUNCTION_PATH` setting to allow filtering out email from DB recording.

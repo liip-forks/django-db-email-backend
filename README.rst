@@ -18,8 +18,8 @@ In settings.py::
     EMAIL_BACKEND = 'db_email_backend.backend.DBEmailBackend'
     # record the email message to database
 
-    # or
-    # EMAIL_BACKEND = 'db_email_backend.backend.SMTPDBEmailBackend'
+    # OR
+    EMAIL_BACKEND = 'db_email_backend.backend.SMTPDBEmailBackend'
     # Record to database and send via SMTP.
     # IF errors happened you can see it in the Admin and resend it again.
 
